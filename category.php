@@ -1,22 +1,36 @@
 <?php
+
 require 'utils/db-connection.php';
-//require 'utils/functions.php';
 
-$sql = "SELECT * FROM article WHERE published = true ORDER BY created DESC";
+
+$id = $_GET['id'];
+
+$sql = "SELECT * from category WHERE id = $id";
 $statement = $pdo->query($sql);
-$articles = $statement->fetchAll();
+$category = $statement->fetch();
+//$category = 0;
 
-if (empty($articles)){
+if (empty($category)){
     $heading = 'OOPS';
     include '404.php';
     die();
 }
+$category_id = $category['id'];
+$sql = "SELECT * FROM article WHERE category_id = $category_id AND published = 1 ORDER BY created DESC" ;
+$statement = $pdo->query($sql);
+$articles = $statement->fetchAll();
 
-$link_active = 'home';
 
-//Include Header
-include_once "includes/header.php"; ?>
+$link_active = $category['id'];
+$title = $category['name'] . ' | Category';
+$description = $category['description'];
+$heading = $category['name'];
 
+
+
+//include Header file
+require "includes/header.php";
+?>
 
 <!-- ====== Blog Section Start -->
 <section class="pt-20 pb-10 lg:pt-[120px] lg:pb-20">
@@ -67,13 +81,3 @@ include_once "includes/header.php"; ?>
     </div>
 </section>
 <!-- ====== Blog Section End -->
-
-<?php include_once "includes/footer.php";
-
-
-
-
-
-
-
-

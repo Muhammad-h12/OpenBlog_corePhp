@@ -9,14 +9,14 @@
             <div class="w-full px-4 md:w-1/3 lg:w-1/2">
                 <div class="my-1 flex justify-center md:justify-end">
                     <p class="text-base text-[#f3f4fe]">
-                        Designed and Developed by
+                        &copy; <?= Date('Y') ;?>
                         <a
-                            href="https://tailgrids.com"
+                            href="/"
                             rel="nofollow noopner"
                             target="_blank"
                             class="text-primary hover:underline"
                         >
-                            TailGrids and UIdeck
+                            Simple CMS | Using Core PHP
                         </a>
                     </p>
                 </div>

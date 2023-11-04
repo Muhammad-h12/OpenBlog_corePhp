@@ -1,6 +1,7 @@
 <?php
 
-require 'db-connection.php';
+require 'utils/db-connection.php';
+
 
 $sql = "SELECT * FROM category";
 
@@ -18,7 +19,7 @@ $categories = $statement->fetchAll();
     <div class="container">
         <div class="relative -mx-4 flex items-center justify-between">
             <div class="w-60 max-w-full px-4">
-                <a href="index.html" class="navbar-logo block w-full py-5">
+                <a href="/cms/" class="navbar-logo block w-full py-5">
                     <img
                         src="assets/images/logo/logo-white.svg"
                         alt="logo"
@@ -51,7 +52,7 @@ $categories = $statement->fetchAll();
                             <!--  Dont forget to change harcoded url Later -->
                                 <a
                                         href="http://localhost/cms/"
-                                        class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
+                                        class="<?= isset($link_active) && $link_active == 'home' ? 'active' : '' ?> ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70">
                                     Home
                                 </a>
                             </li>
@@ -62,8 +63,8 @@ $categories = $statement->fetchAll();
 
                             <li class="group relative">
                                 <a
-                                    href="/#home"
-                                    class="ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70"
+                                    href="/cms/category.php?<?php echo 'id='.$category['id']?>"
+                                    class="<?php echo (isset($link_active) && $link_active == $category['id']) ? 'active' : ''; ?> ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70"
                                 >
                                     <?php echo $category['name']; ?>
                                 </a>
