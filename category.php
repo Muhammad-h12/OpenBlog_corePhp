@@ -2,8 +2,13 @@
 
 require 'utils/db-connection.php';
 
+//collection and Validation
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
-$id = $_GET['id'];
+//validation
+if(!$id){
+    include '404.php';
+}
 
 $sql = "SELECT * from category WHERE id = $id";
 $statement = $pdo->query($sql);
@@ -11,9 +16,9 @@ $category = $statement->fetch();
 //$category = 0;
 
 if (empty($category)){
-    $heading = 'OOPS';
+//    $heading = 'OOPS';
     include '404.php';
-    die();
+//    die();
 }
 $category_id = $category['id'];
 $sql = "SELECT * FROM article WHERE category_id = $category_id AND published = 1 ORDER BY created DESC" ;

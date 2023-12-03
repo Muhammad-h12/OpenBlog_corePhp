@@ -7,9 +7,9 @@ $statement = $pdo->query($sql);
 $articles = $statement->fetchAll();
 
 if (empty($articles)){
-    $heading = 'OOPS';
+//    $heading = 'OOPS';
     include '404.php';
-    die();
+//    die();
 }
 
 $link_active = 'home';

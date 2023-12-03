@@ -6,7 +6,7 @@ require 'utils/db-connection.php';
 $sql = "SELECT * FROM category";
 
 $statement = $pdo->query($sql);
-$categories = $statement->fetchAll();
+$navigation = $statement->fetchAll();
 //print_r($categories);
 ?>
 
@@ -57,19 +57,20 @@ $categories = $statement->fetchAll();
                                 </a>
                             </li>
                             <?php
-                            if (!empty($categories)){
-                                foreach ($categories as $category){
+                            if (!empty($navigation)){
+                                foreach ($navigation as $navItem){
+                                    // Show that navItems only whose navigation value is set to 1
+                                    if($navItem['navigation']){
                                 ?>
-
                             <li class="group relative">
                                 <a
-                                    href="/cms/category.php?<?php echo 'id='.$category['id']?>"
-                                    class="<?php echo (isset($link_active) && $link_active == $category['id']) ? 'active' : ''; ?> ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70"
+                                    href="/cms/category.php?<?php echo 'id='.$navItem['id']?>"
+                                    class="<?php echo (isset($link_active) && $link_active == $navItem['id']) ? 'active' : ''; ?> ud-menu-scroll mx-8 flex py-2 text-base text-dark group-hover:text-primary lg:mr-0 lg:inline-flex lg:py-6 lg:px-0 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70"
                                 >
-                                    <?php echo $category['name']; ?>
+                                    <?php echo html_escape($navItem['name']); ?>
                                 </a>
                             </li>
-                           <?php } } ?>
+                           <?php } } } ?>
 
 <!--                            <li class="submenu-item group relative">-->
 <!--                                <a-->

@@ -1,5 +1,6 @@
 <?php
-
+$title = '404 | Resource not found';
+$heading = 'Page Not Found';
 include "includes/header.php";
 ?>
 
@@ -54,3 +55,4 @@ include "includes/header.php";
     <!-- ====== 404 Section End -->
 <?php
 include "includes/footer.php";
+die();

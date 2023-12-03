@@ -2,19 +2,25 @@
 
 require 'utils/db-connection.php';
 
-$id = $_GET['id'];
+//collection and Validation
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+//validation
+if(!$id){
+    include '404.php';
+}
 
 $sql = "SELECT * FROM article WHERE id = $id";
 $statement = $pdo->query($sql);
 $article = $statement->fetch();
 //$article = 0;
 
+
+
 if(empty($article)){
-    $title = 'Page Not Found';
-    $heading = '404';
     include '404.php';
-    die();
 }
+
 $title = $article['title'];
 $description = $article['summary'];
 $link_active = $article['category_id'];
