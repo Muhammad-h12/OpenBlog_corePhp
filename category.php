@@ -10,8 +10,9 @@ if(!$id){
     include '404.php';
 }
 
-$sql = "SELECT * from category WHERE id = $id";
-$statement = $pdo->query($sql);
+$sql = "SELECT * from category WHERE id = :id";
+$statement = $pdo->prepare($sql);
+$statement->execute(['id' => $id]);
 $category = $statement->fetch();
 //$category = 0;
 
