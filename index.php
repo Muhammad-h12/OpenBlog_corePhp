@@ -2,7 +2,7 @@
 require 'utils/db-connection.php';
 //require 'utils/functions.php';
 
-$sql = "SELECT * FROM article WHERE published = true ORDER BY created DESC";
+$sql = "SELECT * FROM articles WHERE published = true ORDER BY created DESC";
 $statement = $pdo->query($sql);
 $articles = $statement->fetchAll();
 

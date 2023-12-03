@@ -14,7 +14,7 @@ $sql = "SELECT a.id, a.title, a.content, a.summary, a.created, a.published, a.ca
         c.name AS category_name,
         CONCAT(m.forename, ' ', m.surname) AS author,
         i.file AS article_image, i.alt AS image_alt
-        FROM article AS a 
+        FROM articles AS a 
         JOIN category AS c ON a.category_id = c.id
         JOIN member AS m ON a.member_id = m.id
         LEFT JOIN image AS i ON a.image_id = i.id
@@ -22,7 +22,7 @@ $sql = "SELECT a.id, a.title, a.content, a.summary, a.created, a.published, a.ca
 $statement = $pdo->prepare($sql);
 $statement->execute(['id' => $id]);
 $article = $statement->fetch();
-//$article = 0;
+//$articles = 0;
 
 
 

@@ -22,7 +22,7 @@ if (empty($category)){
 //    die();
 }
 $category_id = $category['id'];
-$sql = "SELECT * FROM article WHERE category_id = $category_id AND published = 1 ORDER BY created DESC" ;
+$sql = "SELECT * FROM articles WHERE category_id = $category_id AND published = 1 ORDER BY created DESC" ;
 $statement = $pdo->query($sql);
 $articles = $statement->fetchAll();
 
