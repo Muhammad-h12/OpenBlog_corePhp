@@ -1,5 +1,5 @@
 <?php include 'includes/header.php' ?>
 
-Blog Edit Page
+    Blog Create Page
 
 <?php include 'includes/footer.php' ?>

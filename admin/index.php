@@ -1,4 +1,10 @@
-<?php include "includes/header.php";?>
+<?php
+
+ include 'config.php';
+ include "includes/admin-header.php";
+
+?>
+
 
     <!-- Small boxes (Stat box) -->
     <div class="row">
@@ -8,7 +14,7 @@
                 <div class="inner">
                     <h3>150</h3>
 
-                    <p>New Orders</p>
+                    <p>New Blogs</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -76,4 +82,4 @@
 
 
 
-<?php include "includes/footer.php";?>
+<?php include "includes/admin-footer.php";?>
