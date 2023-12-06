@@ -12,6 +12,23 @@
     $categories = $statement->fetchAll();
 
 
+    //Delete logic
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $id = $_POST['id'];
+        if ($id){
+            $sql = 'DELETE FROM category WHERE id=:id';
+            $statement = $pdo->prepare($sql);
+            $message = $statement->execute(['id' => $id]) ? true : false ;
+
+            if($message){
+                header('Location:' . ADMIN_URL . 'article-categories/index.php?success="Deleted Successfully');
+            }else{
+                header('Location:' . ADMIN_URL . 'article-categories/index.php?error="Can`t Delete');
+            }
+        }
+    }
+
     include '../includes/admin-header.php';
 ?>
 
@@ -75,9 +92,11 @@
             <?php } ?>
             <?php if($error_msg) { ?>
                 <div class="alert alert-danger">
-                    <?php print_r($success_msg); ?>
+                    <?php print_r($error_msg); ?>
                 </div>
             <?php } ?>
+        </div>
+        <div class="row">
             <div class="col-10">
                 <h3 class="card-title">Article Categories</h3>
             </div>
@@ -110,13 +129,10 @@
                 <td>Admin</td>
                 <td></td>
                 <td>
-                    <form action="<?php echo ADMIN_URL . 'article-categories/edit.php' ?>" method="GET">
+                    <form action="<?php echo ADMIN_URL . 'article-categories/index.php' ?>" method="POST">
+                     <a class="padding: 0!important;" href="<?php echo ADMIN_URL . 'article-categories/edit.php?id='.$category['id']; ?>"> <i class="fas fa-edit"></i></a>
                         <input type="hidden" name="id" value=<?php echo $category['id']; ?>>
-                        <button type="submit" class="border-transparent fas fa-edit padding: 0!important;"" value="edit"> </i></button>
-                    </form>
-                    <form action="<?php echo ADMIN_URL . 'article-categories/index.php' ?>">
-                        <input type="hidden" name="id" value=<?php echo $category['id']; ?>>
-                        <button type="submit" class="btn btn-link text-danger" value="delete" onclick="return confirm('Are you sure you want to delete this Class?');">
+                        <button type="submit" class="btn btn-link text-danger" value="delete" onclick="return confirm('Are you sure you want to delete this Category?');">
                             <i class="fa fa-trash"></i>
                         </button>
                     </form>

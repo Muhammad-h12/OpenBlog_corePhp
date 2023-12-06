@@ -17,6 +17,7 @@
     $errors = [
             'name' => '',
             'description' => '',
+            'warning' => '',
     ];
 
 //collection & validation
@@ -40,10 +41,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         header('Location:' . ADMIN_URL .'article-categories/create.php?error='.$invalid);
         exit;
     }else{
-        $sql = 'INSERT INTO category(name, description, navigation) VALUES (:name, :description, :navigation)';
-        $statement = $pdo->prepare($sql);
-        $statement->execute(['name'=> $category['name'], 'description' => $category['description'], 'navigation' => $category['navigation']]);
-        header('Location:' . ADMIN_URL . 'article-categories/index.php?success=Category added Successfully');
+        try{
+            $sql = 'INSERT INTO category(name, description, navigation) VALUES (:name, :description, :navigation)';
+            $statement = $pdo->prepare($sql);
+            $statement->execute(['name'=> $category['name'], 'description' => $category['description'], 'navigation' => $category['navigation']]);
+            header('Location:' . ADMIN_URL . 'article-categories/index.php?success=Category added Successfully');
+        } catch (PDOException $e){
+            if ($e->errorInfo[1] === 1062 ){
+                $errors['warning'] = 'Category Name already in use';
+                header('Location:' . ADMIN_URL . 'article-categories/create.php?error=Category Name already in use');
+            }else{
+                throw $e;
+            }
+        }
+
     }
 
 
