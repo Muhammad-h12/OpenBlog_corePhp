@@ -14,7 +14,7 @@ $sql = "SELECT a.id, a.title, a.content, a.summary, a.created, a.published, a.ca
         c.name AS category_name,
         CONCAT(m.forename, ' ', m.surname) AS author,
         i.file AS article_image, i.alt AS image_alt
-        FROM articles AS a 
+        FROM article AS a 
         JOIN category AS c ON a.category_id = c.id
         JOIN member AS m ON a.member_id = m.id
         LEFT JOIN image AS i ON a.image_id = i.id

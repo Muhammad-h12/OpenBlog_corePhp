@@ -125,7 +125,7 @@
             <tr>
                 <td>1.</td>
                 <td><?php echo html_escape($category['name']); ?></td>
-                <td>1</td>
+                <td><?php echo $category['navigation']; ?></td>
                 <td>Admin</td>
                 <td></td>
                 <td>
